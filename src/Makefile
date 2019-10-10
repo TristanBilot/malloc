@@ -3,7 +3,7 @@ CFLAGS=-Wall -Werror -Wextra -pedantic -std=c99
 DEPS=block_list.h
 PATH=src/
 
-SRC=malloc.c utils.c
+SRC=malloc.c utils.c tests.c
 OBJ=$(SRC:.c=.o)
 
 malloc: $(OBJ)

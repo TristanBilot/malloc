@@ -22,7 +22,6 @@ struct block *divise_block(struct block *l, size_t size)
 	new->state = FREE;
 	l->size = size;
 	l->state = BUSY;
-
 	new->next = l->next;
 	l->next = new;
 	return l;
@@ -155,6 +154,7 @@ void print_heap(struct list* list)
     if (iterator->state != FREE)
     	cpt += iterator->size + sizeof(struct block);
     iterator = iterator->next;
+    printf("%zu\n", list->size);
   }
   printf("°Filled size: %zu\n", cpt);
   printf("°Size of the list: %zu\n", list->size);

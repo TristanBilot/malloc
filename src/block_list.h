@@ -6,6 +6,7 @@
 #include <stddef.h>
 
 #define PAGE_SIZE 4096
+#define BLOCK_SIZE sizeof(struct block)
 #define ADDR(ptr) (struct block*)((char*) ptr)
 #define ALIGN(num, align)(((num) + ((align) - 1)) & ~((align) - 1))
 

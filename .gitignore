@@ -1,0 +1,4 @@
+src/malloc.o
+src/malloc
+src/tests.o
+src/utils.o

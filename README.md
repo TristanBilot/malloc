@@ -19,3 +19,8 @@ LD_PRELOAD=./libmalloc.so ls -la
 <h3>Debug</h3>
 If you want to modify and test your own version of code, you can debug it by using GDB after loading the .so file:
 
+```
+gdb ls -la
+set exec-wrapper env 'LD_PRELOAD=./libmalloc.so'
+start
+```

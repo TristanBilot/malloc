@@ -1,5 +1,6 @@
 # malloc
-Memory allocator implementation in C: implement malloc(), calloc(), free(), realloc()
+Memory allocator implementation in C: implement malloc(), calloc(), free(), realloc().
+This program supports multi-thread applications and use fragmentation to free memory and improve the speed of each allocation.
 
 
 <h3>Build and run the library</h3>

@@ -1,15 +1,32 @@
 CC=gcc
-CFLAGS=-Wall -Werror -Wextra -pedantic -std=c99
+CFLAGS = -Wall -Wextra -Werror -pedantic -std=c99 -fPIC \
+         -fvisibility=hidden -fno-builtin -D_DEFAULT_SOURCE
+CFLAGS += -g
+LDFLAGS = -shared
+TARGET_LIB = libmalloc.so
+OBJS = src/malloc.o src/utils.o
+CALL_LIB = libtracemalloc.so
+CALL_OBJS = src/call_trace.o
 
-PATH=src/
-SRC=$(PATH)malloc.c $(PATH)utils.c $(PATH)tests.c
-OBJ=$(SRC:.c=.o)
+SRC = src/utils.c src/malloc.c tests/test_unit.c
+O = src/utils.o src/malloc.o tests/tests.o
+OBJ = $(SRC:.o=.c)
 
-malloc:		$(OBJ)
-		$(CC) $(CFLAGS) -o malloc $(OBJ)
+.PHONY: all $(TARGET_LIB) $(CALL_LIB) trace clean
 
-libmalloc.so: 	$(OBJ)
-		$(CC) -c -fpic $(SRC) $(CFLAGS)
+all: $(TARGET_LIB)
+
+check: $(OBJ)
+	$(CC) $(CFLAGS) -o malloc $(OBJ)
+
+$(TARGET_LIB): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
+
+trace: $(CALL_LIB)
+
+$(CALL_LIB): CFLAGS += -g -fPIC -ldl
+$(CALL_LIB): $(CALL_OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
 
 clean:
-		rm -f $(OBJ)
+	$(RM) $(O) $(TARGET_LIB) $(CALL_LIB) $(OBJS)

@@ -12,11 +12,7 @@ make libmalloc.so
 
 Then, you can use some commands by loading the library:
 <h4>Linux</h4>
-```
-LD_PRELOAD=./libmalloc.so tree /
-LD_PRELOAD=./libmalloc.so git status
-LD_PRELOAD=./libmalloc.so ls -la
-```
+
 
 <h4>MacOS</h4>
 
